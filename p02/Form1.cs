@@ -30,41 +30,30 @@ namespace p02
                 listBox1.Items.Add(pole[i].ToString());
 
             }
-            int max = pole.Max();
-            int min = pole.Min();
-            int dmin = 100;
-            int dmax = -20;
-            for (int i = 0; i < n; i++)
-            {
-                if (pole[i] > dmax)
-                {
-                    if (pole[i] != max)
-                    {
-                        dmax = pole[i];
-                    }
-                }
-                if (pole[i] < dmin)
-                {
-                    if (pole[i] != min)
-                    {
-                        dmin = pole[i];
-                    }
-                }
-            }
-            if (radioButton1.Checked)
-            {
-                Array.Sort(pole);
-                foreach (int s in pole)
-                    listBox2.Items.Add(s);
-            }
-            if (radioButton2.Checked)
-            {
-                Array.Sort(pole);
-                Array.Reverse(pole);
-                foreach (int s in pole)
-                    listBox2.Items.Add(s);
+            Array.Sort(pole);
+            int max = pole[pole.Length - 1];
+            int min = pole[0];
+            int dmin = 0;
+            int dmax = 0;
+            int prvnipmax = Array.IndexOf(pole, max);
+ 
+   
+            int poslednipmin = Array.LastIndexOf(pole, min);
+
+            dmin = pole[poslednipmin + 1];
+            dmax = pole[prvnipmax - 1];
+
+
+            if (radioButton2.Checked)    Array.Reverse(pole);
+            
                 
-            }
+            
+            foreach (int s in pole)
+                    listBox2.Items.Add(s);
+
+                
+
+            
             MessageBox.Show("druhe nejvetsi cislo je " + dmax + " a druhe nejmensi cislo je " + dmin);
         }
     }

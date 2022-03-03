@@ -48,17 +48,16 @@ namespace p01
                     maxp = i;
                 }
             }
-            double prohoz = min;
             pole[minp] = max;
-            pole[maxp] = prohoz;
+            pole[maxp] = min;
             double soucet = 0;
             for (int i = 0; i < n; i++)
             {
                 listBox2.Items.Add(pole[i].ToString("f2"));
                 soucet += pole[i];
             }
-            int pocet = n;
-            double ar = (soucet - (min + max)) / (pocet - 2);
+
+            double ar = (soucet - (min + max)) / (n - 2);
             MessageBox.Show("prumer bez max a min je " + ar.ToString("f2"));
         }
 
