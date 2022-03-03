@@ -28,14 +28,14 @@ namespace p01
 
             }
             
-            for (int i = 0; i < pole.Length; i++)
+            for (int i = 0; i < n; i++)
                 listBox1.Items.Add(pole[i].ToString("f2"));
 
             double min = 10000;
             double max = -20;
             int minp = 0;
             int maxp = 0;
-            for (int i = 0; i < pole.Length; i++)
+            for (int i = 0; i < n; i++)
             {
                 if (pole[i] < min)
                 {
@@ -51,12 +51,13 @@ namespace p01
             double prohoz = min;
             pole[minp] = max;
             pole[maxp] = prohoz;
-            for (int i = 0; i < pole.Length; i++)
+            double soucet = 0;
+            for (int i = 0; i < n; i++)
             {
                 listBox2.Items.Add(pole[i].ToString("f2"));
+                soucet += pole[i];
             }
-            double soucet = pole.Sum();
-            int pocet = pole.Length;
+            int pocet = n;
             double ar = (soucet - (min + max)) / (pocet - 2);
             MessageBox.Show("prumer bez max a min je " + ar.ToString("f2"));
         }
@@ -64,6 +65,32 @@ namespace p01
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Random rnd = new Random();
+            int n = Convert.ToInt32(textBox1.Text);
+            double[] pole = new double[n];
+            for (int i = 0; i < n; i++)
+            {
+                pole[i] = rnd.NextDouble() * (1000 - 1) + 1;
+                listBox1.Items.Add(pole[i].ToString("f2"));
+            }
+            double max = pole.Max();
+            double min = pole.Min();
+            int pozicemax = Array.IndexOf(pole, max);
+            int pozicemin = Array.IndexOf(pole, max);
+            pole[pozicemax] = min;
+            pole[pozicemin] = max;
+            foreach (double s in pole)
+            {
+                listBox2.Items.Add(s.ToString("f2"));
+            }
+            double soucet = pole.Sum();
+            int pocet = pole.Length;
+            double ar = (soucet - (min + max)) / (pocet - 2);
+            MessageBox.Show("prumer bez max a min je " + ar.ToString("f2"));
         }
     }
 }
