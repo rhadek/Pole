@@ -40,18 +40,14 @@ namespace p04
             }
             int max = pole.Max();
             int pozicemax = Array.IndexOf(pole, max);
-            for (int i = 0; i < pole.Length - 1; i++)
+            int[] pole1 = new int[pozicemax];
+            int[] pole2 = new int[pole.Length - pozicemax - 1];
+            pole1 = pole.Take(pozicemax).ToArray();
+            pole2 = pole.Skip(pozicemax + 1).ToArray();
+            int[] poleC = pole1.Concat(pole2).ToArray();
+            foreach (int i in poleC)
             {
-                if (pole[i] == max)
-                {
-                    pole[i] = pole[i + 1];
-                    i--;
-                }
-                else
-                {
-                    pole[i] = pole[i + 1];
-                    listBox3.Items.Add(pole[i].ToString());
-                }
+                listBox3.Items.Add(i.ToString());
             }
         }
     }
