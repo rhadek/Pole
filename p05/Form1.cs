@@ -35,13 +35,31 @@ namespace p05
                 listBox1.Items.Add(i.ToString());
             }
             int b = Convert.ToInt32(textBox2.Text);
-            int poziceb = Array.IndexOf(pole, b);
-            int[] pole1 = pole.Take(poziceb + 1).ToArray();
+            int dp = 0 - 1;
+            int dm = n + 1;
+            bool f = false;
+            for (int i = 0; i < pole.Length; i++)
+            {
+                if (pole[i] <= b)
+                {
+                    dp = i;
+                }
+                if (pole[i] > b)
+                {
+                    if (!f)
+                    {
+                        dm = i;
+                    }
+                    
+                    f = true;
+                }
+            }
+            int[] pole1 = pole.Take(dp + 1).ToArray();
             foreach (int i in pole1)
             {
                 listBox2.Items.Add(i.ToString());
             }
-            int[] pole2 = pole.Skip(pole.Length - poziceb).ToArray();
+            int[] pole2 = pole.Skip(dm).ToArray();
             foreach (int i in pole2)
             {
                 listBox3.Items.Add(i.ToString());
